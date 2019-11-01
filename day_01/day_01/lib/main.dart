@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 //void main() => runApp(MyApp());
 void main() => runApp(SplashScreen());
@@ -132,11 +133,15 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   onDoneLoading() async {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+    // Navigator.of(context).pushReplacement(PageRouteBuilder(transitionDuration: Duration(seconds: 2), pageBuilder: (_, __, ___) => HomeScreen()));
   }
 
   @override
   Widget build(BuildContext context) {
+    //SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    // To make this screen full screen.
+    // It will hide status bar and notch.
+    SystemChrome.setEnabledSystemUIOverlays([]);
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
@@ -144,9 +149,9 @@ class SplashScreenState extends State<SplashScreen> {
               fit: BoxFit.cover)),
       child: Center(
         child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.redAccent),
-        ),
-      ),
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.redAccent)
+        )
+      )
     );
   }
 }
@@ -161,6 +166,9 @@ class HomeScreen extends StatelessWidget {
           style: TextStyle(fontSize: 24.0),
         ),
       ),
+      appBar: AppBar(
+        title: Text('Homescreen'),
+      )
     );
   }
 }
